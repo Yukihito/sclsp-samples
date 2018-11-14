@@ -50,6 +50,7 @@ trait JsSubsetParser extends parsing.Parser {
   })
   private def operators(patterns: List[String], arg: Parser[Node]): Parser[List[Node => Node]] = rep(patterns.map(pattern => operator(pattern, arg)) match {
     case head :: tail => tail.foldLeft(head)((acc, value) => acc | value)
+    case _ => failure("An unknown error occurred when parsing operator.")
   })
   private def operator(opPattern: String, rhsPattern: Parser[Node]): Parser[Node => Node] = kw(opPattern) ~ rhsPattern ^^ {
     case kw ~ lhs => rhs => NodeList(List(kw, rhs, lhs))
