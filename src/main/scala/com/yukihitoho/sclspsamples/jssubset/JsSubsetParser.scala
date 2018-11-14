@@ -8,10 +8,11 @@ import scala.util.parsing.combinator._
 
 trait JsSubsetParser extends parsing.Parser {
   class Parsers(fileName: String) extends JavaTokenParsers {
-    private def function: Parser[Node] = positioned("function" ~> parameters <~ "{" ~> fields <~ "}")
+    private def function: Parser[Node] = positioned("function" ~> parameters ~ "{" ~ fields <~ "}" ^^ {
+      case parameters ~ "{" ~ fields => NodeList(List(Symbol("lambda", fileName), parameters, fields), fileName)})
     private def symbol: Parser[Node] = positioned(ident ^^ (v => Symbol(v, fileName)))
-    private def parameters: Parser[NodeList] = positioned("(" ~> repsep(symbol, ",") <~ ")" ^^ (symbols => NodeList(symbols, fileName)))
-    private def call: Parser[Node] = ???
+    private def parameters: Parser[Node] = positioned("(" ~> repsep(symbol, ",") <~ ")" ^^ (symbols => NodeList(symbols, fileName)))
+    private def call: Parser[Node] = positioned((function | symbol) ~ arguments ^^ {case symbol ~ arguments => NodePair(symbol, arguments, fileName)})
     private def arguments: Parser[Node] = ???
     private def ifStatement: Parser[Node] = ???
     private def elseStatement: Parser[Node] = ???
@@ -25,6 +26,7 @@ trait JsSubsetParser extends parsing.Parser {
         | "false" ^^ (_ => Symbol("#f", fileName))
         | "null" ^^ (_ => Symbol("#nil", fileName))
         | expr
+        | function
     )
     private def expr: Parser[Node] = positioned(term ~ rep(plus | minus) ^^ {case head ~ tail => (head /: tail)((acc, f) => f(acc))})
     private def plus: Parser[Node => Node] = "+" ~ term ^^ {case _ ~ lhs => rhs => NodeList(List(Symbol("+", fileName), rhs, lhs), fileName)}
@@ -34,7 +36,8 @@ trait JsSubsetParser extends parsing.Parser {
     private def divide: Parser[Node => Node] = "/" ~ factor ^^ {case _ ~ lhs => rhs => NodeList(List(Symbol("/", fileName), rhs, lhs), fileName)}
     private def factor: Parser[Node] = number | symbol | "(" ~> expr <~ ")"
     private def number: Parser[Node] = positioned(floatingPointNumber ^^ (v => NumberLiteral(v.toDouble, fileName)))
-    private def fields: Parser[Node] = ???
+    private def statement: Parser[Node] = positioned(value | function | call)
+    private def fields: Parser[Node] = positioned(rep(statement) ^^ {statements => NodeList(Symbol("begin", fileName) :: statements, fileName)})
 
     def parseToNode(src: String): Either[InvalidSyntax, Node] = parseAll(fields, src) match {
       case Success(result, _) => Right(result)
