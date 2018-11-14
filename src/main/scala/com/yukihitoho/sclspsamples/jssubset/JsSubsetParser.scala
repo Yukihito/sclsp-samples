@@ -59,7 +59,7 @@ trait JsSubsetParser extends parsing.Parser {
   private def symbol: Parser[Node] = positioned(ident ^^ Symbol)
 
   private def value: Parser[Node] = positioned(
-    stringLiteral ^^ (s => StringLiteral(s.slice(1, s.length - 1)))
+        stringLiteral ^^ (s => StringLiteral(s.slice(1, s.length - 1)))
       | floatingPointNumber ^^ (v => NumberLiteral(v.toDouble))
       | kw("!", "not") ~ value ^^ {case kw ~ value => NodePair(kw, value)}
       | "true" ^^ (_ => BooleanLiteral(true))
@@ -71,7 +71,7 @@ trait JsSubsetParser extends parsing.Parser {
       | "(" ~> expr <~ ")"
   )
 
-  private def statement: Parser[Node]  = positioned(ifStatement | whileStatement | varStatement | assignmentStatement | expr)
+  private def statement: Parser[Node]  = positioned((ifStatement | whileStatement | varStatement | assignmentStatement | expr) <~ opt(";"))
   private def statements: Parser[Node] = positioned(rep(statement) ^^ {statements => NodeList(Symbol("begin") :: statements)})
 
   override def parseToNode(src: String, fileName: String): Either[InvalidSyntax, Node] =parseAll(statements, src) match {
