@@ -1,11 +1,24 @@
 package com.yukihitoho.sclspsamples.jssubset
 
+import com.yukihitoho.sclsp.evaluator.EnvironmentFactory
+import com.yukihitoho.sclsp.evaluator.Evaluator
+import com.yukihitoho.sclsp.evaluator.Module
+import com.yukihitoho.sclsp.evaluator.StackTrace
 import com.yukihitoho.sclsp.implementations.DefaultDependencies
+import com.yukihitoho.sclsp.implementations.DefaultEnvironmentFactory
+import com.yukihitoho.sclsp.implementations.DefaultStackTrace
 import com.yukihitoho.sclsp.interpreter.Interpreter
+import com.yukihitoho.sclsp.modules.prelude.Prelude
 import com.yukihitoho.sclsp.parsing.Parser
+import com.yukihitoho.sclspsamples.jssubset.modules.jssubset.JsSubset
 
-class JsSubsetInterpreter extends Interpreter with DefaultDependencies {
+class JsSubsetInterpreter extends Interpreter {
   protected override val parser: Parser = new JsSubsetParser {}
+  protected override val modules: Seq[Module] = Seq(Prelude, JsSubset)
+  protected override val evaluator: Evaluator = new Evaluator {
+    override val stackTrace: StackTrace = new DefaultStackTrace
+  }
+  protected override val environmentFactory: EnvironmentFactory = DefaultEnvironmentFactory
 }
 
 // scalastyle:off

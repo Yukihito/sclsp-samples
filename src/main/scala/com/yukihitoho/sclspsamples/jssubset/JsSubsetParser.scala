@@ -8,14 +8,14 @@ import com.yukihitoho.sclsp.parsing._
 // scalastyle:off
 trait JsSubsetParser extends parsing.Parser {
   private def kw(pattern: String) = positioned(pattern ^^ Symbol)
-  private def kw(pattern: String, internalSymbol: String) = positioned(pattern ^^ (_ => Symbol(internalSymbol)))
+  //private def kw(pattern: String, internalSymbol: String) = positioned(pattern ^^ (_ => Symbol(internalSymbol)))
 
   private def parameters: Parser[Node] = positioned("(" ~> repsep(symbol, ",") <~ ")" ^^ NodeList)
   private def arguments: Parser[Node]  = positioned("(" ~> repsep(expr, ",") <~ ")" ^^ NodeList)
   private def condition: Parser[Node]  = positioned("(" ~> expr <~ ")")
   private def block: Parser[Node]      = positioned("{" ~> statements <~ "}")
 
-  private def function: Parser[Node] = positioned(kw("function", "lambda") ~ parameters ~ block ^^ {
+  private def function: Parser[Node] = positioned(kw("function") ~ parameters ~ block ^^ {
     case kw ~ parameters ~ block => NodeList(List(kw, parameters, block))
   })
   private def call: Parser[Node] = positioned((function | symbol) ~ arguments ^^ {
@@ -32,10 +32,10 @@ trait JsSubsetParser extends parsing.Parser {
   private def whileStatement: Parser[Node] = positioned(kw("while") ~ condition ~ block ^^ {
     case kw ~ condition ~ block => NodeList(List(kw, condition, block))
   })
-  private def varStatement: Parser[Node] = positioned(kw("var", "define") ~ symbol ~ "=" ~ expr ^^ {
+  private def varStatement: Parser[Node] = positioned(kw("var") ~ symbol ~ "=" ~ expr ^^ {
     case kw ~ symbol ~ _ ~ value => NodeList(List(kw, symbol, value))
   })
-  private def assignmentStatement: Parser[Node] = positioned(symbol ~ kw("=", "set!") ~ expr ^^ {
+  private def assignmentStatement: Parser[Node] = positioned(symbol ~ kw("=") ~ expr ^^ {
     case symbol ~ kw ~ expr => NodeList(List(kw, symbol, expr))}
   )
 
@@ -61,7 +61,7 @@ trait JsSubsetParser extends parsing.Parser {
   private def value: Parser[Node] = positioned(
         stringLiteral ^^ (s => StringLiteral(s.slice(1, s.length - 1)))
       | floatingPointNumber ^^ (v => NumberLiteral(v.toDouble))
-      | kw("!", "not") ~ value ^^ {case kw ~ value => NodePair(kw, value)}
+      | kw("!") ~ value ^^ {case kw ~ value => NodePair(kw, value)}
       | "true" ^^ (_ => BooleanLiteral(true))
       | "false" ^^ (_ => BooleanLiteral(false))
       | "null" ^^ (_ => NilLiteral)
