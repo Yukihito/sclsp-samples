@@ -55,7 +55,6 @@ trait JsSubsetParser extends parsing.Parser {
   private def operator(opPattern: String, rhsPattern: Parser[Node]): Parser[Node => Node] = kw(opPattern) ~ rhsPattern ^^ {
     case kw ~ lhs => rhs => NodeList(List(kw, rhs, lhs))
   }
-  //private def expr0: Parser[Node] = positioned(value ~ rep(op("*", value) | op("/", value)) ^^ {case head ~ tail => (head /: tail)((acc, f) => f(acc))})
 
   private def symbol: Parser[Node] = positioned(ident ^^ Symbol)
 
