@@ -75,7 +75,7 @@ trait JsSubsetParser extends parsing.Parser {
   private def statement: Parser[Node]  = positioned((ifStatement | whileStatement | varStatement | assignmentStatement | expr) <~ opt(";"))
   private def statements: Parser[Node] = positioned(rep(statement) ^^ {statements => NodeList(Symbol("begin") :: statements)})
 
-  override def parseToNode(src: String, fileName: String): Either[InvalidSyntax, Node] =parseAll(statements, src) match {
+  override def parseToNode(src: String, fileName: String): Either[InvalidSyntax, Node] = parseAll(statements, src) match {
     case Success(result, _) => Right(result)
     case noSuccess: NoSuccess =>
       val pos = noSuccess.next.pos
