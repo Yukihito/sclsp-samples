@@ -21,11 +21,16 @@ Multiple main classes detected, select one to run:
 
  [1] com.yukihitoho.sclspsamples.jssubset.Main
  [2] com.yukihitoho.sclspsamples.repl.Main
+ [3] com.yukihitoho.sclspsamples.simpleusage.Main
 
 Enter number: 
 ```
 
 ## Contents
+- Simple usage
+  - A simple example of embedding sclsp in a scala application.
+  - This program source codes are contained in [this directory](https://github.com/Yukihito/sclsp-samples/tree/master/src/main/scala/com/yukihitoho/sclspsamples/simpleusage)  
+
 - REPL
   - The REPL of sclsp with default interpreter implementation.
   - This implementation contains the code examples about below.
