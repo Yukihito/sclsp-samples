@@ -1,6 +1,6 @@
 # Sclsp samples
  
- Some examples of use of sclsp.
+ Some examples of use of [sclsp](https://github.com/Yukihito/sclsp).
  
 ## Getting started
 ### Prerequisites
@@ -28,7 +28,7 @@ Enter number:
 ## Contents
 - REPL
   - The REPL of sclsp with default interpreter implementation.
-  - This implementation contents the code examples about below.
+  - This implementation contains the code examples about below.
     - The simple example of embedding sclsp in scala application.
     - Error handling. (Getting error position in code. Usages about stack trace object.)
     - Converting result object to external representation of S-expression.
@@ -37,7 +37,7 @@ Enter number:
 - Subset of JavaScript
   - Implementing JavaScript subset by replace the default sclsp parser with the JavaScript parser.
   - If you want to look how it works at a glance, read [the Main class](https://github.com/Yukihito/sclsp-samples/blob/master/src/main/scala/com/yukihitoho/sclspsamples/jssubset/Main.scala).
-  - This implementation contents the code examples about below.
+  - This implementation contains the code examples about below.
     - Implementing a parser of the subset of JavaScript by using [scala-parser-combinators](https://github.com/scala/scala-parser-combinators).
     - Injecting a own parser implementation to a interpreter.
     - Adding synonym of built-in operators.
