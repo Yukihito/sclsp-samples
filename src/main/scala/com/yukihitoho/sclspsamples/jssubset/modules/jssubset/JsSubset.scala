@@ -21,7 +21,6 @@ object JsSubset extends Module {
     synonym("=", `Set!`),
     synonym("!", Not),
     synonym("||", Or),
-    synonym("&&", And),
-    synonym("==", `Eq?`)
+    synonym("&&", And)
   )
 }

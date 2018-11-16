@@ -8,7 +8,6 @@ import com.yukihitoho.sclsp.parsing._
 // scalastyle:off
 trait JsSubsetParser extends parsing.Parser {
   private def kw(pattern: String) = positioned(pattern ^^ Symbol)
-  //private def kw(pattern: String, internalSymbol: String) = positioned(pattern ^^ (_ => Symbol(internalSymbol)))
 
   private def parameters: Parser[Node] = positioned("(" ~> repsep(symbol, ",") <~ ")" ^^ NodeList)
   private def arguments: Parser[Node]  = positioned("(" ~> repsep(expr, ",") <~ ")" ^^ NodeList)
