@@ -4,7 +4,6 @@ import com.yukihitoho.sclsp.implementations.DefaultInterpreter
 
 // scalastyle:off
 object Main extends App {
-  val interpreter = DefaultInterpreter
   val src: String =
     """
       |(begin
@@ -15,6 +14,6 @@ object Main extends App {
       |        (* n (factorial (- n 1))))))
       |  (factorial 5))
     """.stripMargin
-  println(interpreter.interpret(src, "example.scm")) // Right(NumberValue(120.0))
+  println(DefaultInterpreter.interpret(src, "a-file-name-for-this-sample.scm")) // Right(NumberValue(120.0))
 }
 // scalastyle:on
