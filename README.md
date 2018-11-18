@@ -32,6 +32,7 @@ Enter number:
 1. Simple usage
    - A simple example of embedding sclsp in a scala application.
    - This program source codes are contained in [this directory](https://github.com/Yukihito/sclsp-samples/tree/master/src/main/scala/com/yukihitoho/sclspsamples/simpleusage)
+   - Documents of this sample is [here(japanese)](https://github.com/Yukihito/sclsp-samples/tree/master/docs/SIMPLE_USAGE.ja.md).
 2. REPL
    - The REPL of sclsp with default interpreter implementation.
    - This implementation contains the code examples about below.
@@ -39,6 +40,7 @@ Enter number:
      - Error handling. (Getting error position in code. Usages about stack trace object.)
      - Converting result object to external representation of S-expression.
    - This program source codes are contained in [this directory](https://github.com/Yukihito/sclsp-samples/tree/master/src/main/scala/com/yukihitoho/sclspsamples/repl)
+   - Documents of this sample is [here(japanese)](https://github.com/Yukihito/sclsp-samples/tree/master/docs/REPL.ja.md).   
 3. Subset of JavaScript
    - Implementing JavaScript subset by replace the default sclsp parser with the JavaScript parser.
    - If you want to look how it works at a glance, read [the Main class](https://github.com/Yukihito/sclsp-samples/blob/master/src/main/scala/com/yukihitoho/sclspsamples/jssubset/Main.scala).
@@ -46,7 +48,8 @@ Enter number:
      - Implementing a parser of the subset of JavaScript by using [scala-parser-combinators](https://github.com/scala/scala-parser-combinators).
      - Injecting a own parser implementation to a interpreter.
      - Adding synonym of built-in operators.
-   - This program source codes are contained in [this directory](https://github.com/Yukihito/sclsp-samples/tree/master/src/main/scala/com/yukihitoho/sclspsamples/jssubset)  
+   - This program source codes are contained in [this directory](https://github.com/Yukihito/sclsp-samples/tree/master/src/main/scala/com/yukihitoho/sclspsamples/jssubset)
+   - Documents of this sample is [here(japanese)](https://github.com/Yukihito/sclsp-samples/tree/master/docs/JAVASCRIPT_SUBSET.ja.md).
 4. Sharing variables (that includes lexical closure) with remote process.
    - An example of an implementation of sharing variables with remote process.
      For sharing data with remote process, there are many ways. Separating processes and data and using common data store is one of them. This sample is sort of that.
@@ -55,3 +58,4 @@ Enter number:
    - This implementation contains the code examples about below.
      - Injecting a own data store for variables perpetuation to a interpreter.
    - This program source codes are contained in [this directory](https://github.com/Yukihito/sclsp-samples/tree/master/src/main/scala/com/yukihitoho/sclspsamples/sharedenv)
+   - Documents of this sample is [here(japanese)](https://github.com/Yukihito/sclsp-samples/tree/master/docs/SHARED_ENVIRONMENT.ja.md).
