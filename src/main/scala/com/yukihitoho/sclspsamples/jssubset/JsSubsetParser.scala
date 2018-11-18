@@ -11,6 +11,7 @@ trait JsSubsetParser extends parsing.Parser {
 
   private def parameters: Parser[Node] = positioned("(" ~> repsep(symbol, ",") <~ ")" ^^ NodeList)
   private def arguments: Parser[Node]  = positioned("(" ~> repsep(expr, ",") <~ ")" ^^ NodeList)
+  private def array: Parser[Node]  = positioned("[" ~> repsep(expr, ",") <~ "]" ^^ (exprs => NodeList(Symbol("list") :: exprs)))
   private def condition: Parser[Node]  = positioned("(" ~> expr <~ ")")
   private def block: Parser[Node]      = positioned("{" ~> statements <~ "}")
 
@@ -68,6 +69,7 @@ trait JsSubsetParser extends parsing.Parser {
       | call
       | symbol
       | "(" ~> expr <~ ")"
+      | array
   )
 
   private def statement: Parser[Node]  = positioned((ifStatement | whileStatement | varStatement | assignmentStatement | expr) <~ opt(";"))

@@ -41,7 +41,6 @@ trait Repl extends EvaluationErrorHandler {
         repl()
       case Left(ReadError(Console.ReadError.UserInterrupt)) =>
         logger.info("User interrupt.")
-        repl()
       case Left(ReadError(Console.ReadError.EndOfFile)) =>
         logger.error("Unexpected end of file.")
         repl()

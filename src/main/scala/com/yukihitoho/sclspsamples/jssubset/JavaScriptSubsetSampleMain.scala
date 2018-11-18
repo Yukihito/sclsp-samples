@@ -14,7 +14,7 @@ class JsSubsetInterpreter extends Interpreter with DefaultDependencies {
 }
 
 // scalastyle:off
-object Main extends App with ExternalRepresentationHelper {
+object JavaScriptSubsetSampleMain extends App with ExternalRepresentationHelper {
   val interpreter = new JsSubsetInterpreter
   def trySample(src: String): Unit = {
     println("---- src ----")
@@ -79,6 +79,17 @@ object Main extends App with ExternalRepresentationHelper {
       |
       |factorial(5);
     """.stripMargin) // Right(NumberValue(120.0))
+
+  println("************")
+
+  trySample(
+    """
+      |var x = 1;
+      |var l = [x, 2, 3];
+      |l
+    """.stripMargin) // Right(NumberValue(5.0))
+
+  println("************")
 
   trySample(
     """
