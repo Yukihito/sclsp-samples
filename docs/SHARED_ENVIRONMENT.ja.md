@@ -76,9 +76,9 @@ REPL 自体の実装の詳細は [REPL](https://github.com/Yukihito/sclsp-sample
 
 ## データストアのインターフェースの実装
 自前でデータストアの実装するには、次のクラスを継承した実装を定義する必要があります。
-- [VariablesRepository](): 変数の名前と値のマッピングを永続化し、名前をキーとして保存された値を取得する機能を提供するインターフェースです。
-- [Environment](): VariablesRepository を用いて変数の永続化を行います。また、ツリー上の親子関係を表現することができ、これによって静的スコープを実現します。
-- [EnvironmentFactory](): Environment を作成するインターフェースです。Environment の具体的な実装として何が選択されるかをこれによって隠蔽します。
+- [VariablesRepository](https://github.com/Yukihito/sclsp/blob/master/src/main/scala/com/yukihitoho/sclsp/evaluator/Variable.scala): 変数の名前と値のマッピングを永続化し、名前をキーとして保存された値を取得する機能を提供するインターフェースです。
+- [Environment](https://github.com/Yukihito/sclsp/blob/master/src/main/scala/com/yukihitoho/sclsp/evaluator/Environment.scala): VariablesRepository を用いて変数の永続化を行います。また、ツリー上の親子関係を表現することができ、これによって静的スコープを実現します。
+- [EnvironmentFactory](https://github.com/Yukihito/sclsp/blob/master/src/main/scala/com/yukihitoho/sclsp/evaluator/Environment.scala): Environment を作成するインターフェースです。Environment の具体的な実装として何が選択されるかをこれによって隠蔽します。
 
 Redisのクライアントとして [Lettuce](https://lettuce.io/) を、値のシリアライズに [circe](https://circe.github.io/circe/) をつかって上記を実装した例が [SharedEnvironment.scala](https://github.com/Yukihito/sclsp-samples/blob/master/src/main/scala/com/yukihitoho/sclspsamples/sharedenv/SharedEnvironment.scala) です。
 (サンプル実装のため、データストア内のデータのガベージコレクションなど、メモリ管理について一切考慮されていません。また、パフォーマンスを考慮した実装にもなっていません)

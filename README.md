@@ -43,7 +43,7 @@ Enter number:
    - Documents of this sample is [here(japanese)](https://github.com/Yukihito/sclsp-samples/tree/master/docs/REPL.ja.md).   
 3. Subset of JavaScript
    - Implementing JavaScript subset by replace the default sclsp parser with the JavaScript parser.
-   - If you want to look how it works at a glance, read [the Main class](https://github.com/Yukihito/sclsp-samples/blob/master/src/main/scala/com/yukihitoho/sclspsamples/jssubset/Main.scala).
+   - If you want to look how it works at a glance, read [the Main class](https://github.com/Yukihito/sclsp-samples/blob/master/src/main/scala/com/yukihitoho/sclspsamples/jssubset/JavaScriptSubsetSampleMain.scala).
    - This implementation contains the code examples about below.
      - Implementing a parser of the subset of JavaScript by using [scala-parser-combinators](https://github.com/scala/scala-parser-combinators).
      - Injecting a own parser implementation to a interpreter.
