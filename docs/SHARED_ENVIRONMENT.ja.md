@@ -34,41 +34,45 @@ $ sbt "runMain com.yukihitoho.sclspsamples.sharedenv.JavaScriptReplForSharedEnvi
 ```
 $ sbt "runMain com.yukihitoho.sclspsamples.sharedenv.JavaScriptReplForSharedEnvironmentMain"
 
-> var _messages = [];
-_messages
-> var chat = function(msg) {
->   _messages = cons(msg, _messages);
->   "Message sent!"
+> var ChatApp = function() {
+>   var messages = [];
+>   function(command, comment) {
+>     if (command == "chat") {
+>       messages = cons(comment, messages);
+>       "Message sent!"
+>     } else if (command == "show") {
+>       messages;
+>     }
+>   }
 > }
-chat
-> var show = function() {
->   _messages;
-> }
-show
+ChatApp
+> var app = ChatApp();
+app
+
 ```
-(2) B が (1) で定義した "chat" をつかってメッセージを投稿します
+(2) B が (1) で定義した app をつかってメッセージを投稿します
 ```
-> chat("hello");
+> app("chat", "hello!");
 "Message sent!"
 ```
-(3) A が Lisp版の REPL を立ち上げ、 (1) で B が定義した "show" をつかって投稿されたメッセージを確認します
+(3) A が Lisp版の REPL を立ち上げ、 (1) で B が定義した app をつかって投稿されたメッセージを確認します
 ```
 $ sbt "runMain com.yukihitoho.sclspsamples.sharedenv.LispReplForSharedEnvironmentMain"
 
-> (show)
-("hello")
+> (app "show" #nil)
+("hello!")
 ``` 
 
-(4) A が (1) で B が定義した "chat" を使って返信します
+(4) A が (1) で B が定義した app を使って返信します
 ```
-> (chat "hi")
+> (app "chat" "hi")
 "Message sent!"
 ```
 
-(5) B が (1) で定義した "show" を使って投稿されたメッセージを確認します
+(5) B が (1) で定義した app を使って投稿されたメッセージを確認します
 ```
-> show();
-("hi" "hello")
+> app("show", null);
+("hi" "hello!")
 ```
 
 # 実装の詳細
