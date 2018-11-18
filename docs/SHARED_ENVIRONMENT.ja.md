@@ -6,9 +6,6 @@
 
 サンプルコードは[ここ](https://github.com/Yukihito/sclsp-samples/tree/master/src/main/scala/com/yukihitoho/sclspsamples/sharedenv)にあります
 
-このサンプルに含まれる内容は次のとおりです
-- 自前で作成した変数のデータストアの実装の依存性をインタプリタに注入する
-
 # サンプルの実行
 
 サンプルでは、複数プロセスで共有する変数のデータストアに [Redis](https://redis.io/) を利用します。
