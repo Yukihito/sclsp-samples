@@ -120,7 +120,7 @@ sclsp の構文木は [Node.scala](https://github.com/Yukihito/sclsp/blob/master
 
 [JavaScriptSubsetSampleMain.scala](https://github.com/Yukihito/sclsp-samples/blob/master/src/main/scala/com/yukihitoho/sclspsamples/jssubset/JavaScriptSubsetSampleMain.scala)
 
-```$scala
+```scala
 class JsSubsetInterpreter extends Interpreter with DefaultDependencies {
   protected override val parser: Parser = new JsSubsetParser {}
   protected override val modules: Seq[Module] = Seq(Prelude, JsSubset)

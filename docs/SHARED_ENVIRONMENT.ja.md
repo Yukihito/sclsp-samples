@@ -88,7 +88,7 @@ Redisのクライアントとして [Lettuce](https://lettuce.io/) を、値の�
 
 [LispReplForSharedEnvironmentMain.scala](https://github.com/Yukihito/sclsp-samples/blob/master/src/main/scala/com/yukihitoho/sclspsamples/sharedenv/LispReplForSharedEnvironmentMain.scala)
 
-```$scala
+```scala
 class SharedEnvironmentInterpreter(
   connection: StatefulRedisConnection[String, String]
 ) extends Interpreter with DefaultDependencies {

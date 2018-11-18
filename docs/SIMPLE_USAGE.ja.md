@@ -17,7 +17,7 @@ Right(NumberValue(120.0))
 コード全体は次のとおりです
 
 [com.yukihitoho.sclspsamples.simpleusage.Main.scala](https://github.com/Yukihito/sclsp-samples/blob/master/src/main/scala/com/yukihitoho/sclspsamples/simpleusage/Main.scala)
-```$scala
+```scala
 package com.yukihitoho.sclspsamples.simpleusage
 
 import com.yukihitoho.sclsp.implementations.DefaultInterpreter
